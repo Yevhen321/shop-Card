@@ -1,25 +1,37 @@
-import logo from './logo.svg';
+import React, {useContext} from 'react';
 import './App.css';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
+import ProductPage from "./pages/ProductsPage";
+import InfoPage from "./pages/InfoPage";
+import Header from "./components/Header/index";
+import {CounterContext, CounterContextProvider} from "./context/counter-context";
+import Basket from "./pages/BasketPage";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+
+    return(
+      <CounterContextProvider>
+              <Router>
+                <Header />
+                  <Switch>
+                      <Route path="/product">
+                          <ProductPage   />
+                      </Route>
+                      <Route path="/info">
+                          <InfoPage />
+                      </Route>
+                      <Route path="/basket">
+                          <Basket />
+                      </Route>
+                  </Switch>
+              </Router>
+      </CounterContextProvider>
+  )
 }
 
 export default App;
