@@ -1,10 +1,10 @@
 import React from 'react';
 
 const styles = {
-    img:{
+    img: {
         maxHeight: '10rem',
     },
-    button:{
+    button: {
         fontSize: '1rem',
         padding: '.2rem',
         margin: '.1rem',
@@ -16,15 +16,20 @@ const styles = {
     },
 }
 
-const ProductItem = ( {product, onAdd } )=> {
-    return(
+const Index = ({product, onAdd } )=> {
+    return (
         <div>
             <img src={product.image} style={styles.img} alt={product.name}/>
             <h3>{product.name}</h3>
             $ {product.price}
-            <button style={styles.button} onClick={() => onAdd(product) }>Add to Basket</button>
+            <button
+                style={styles.button}
+                onClick={() => onAdd(product)}
+            >
+                Add to Basket
+            </button>
         </div>
     );
 }
 
-export default ProductItem;
+export default Index;

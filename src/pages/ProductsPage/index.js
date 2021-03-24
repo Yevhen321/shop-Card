@@ -1,29 +1,22 @@
 import React, {useContext} from "react";
-import ProductItem from "../../components/ProductItem";
-import { CounterContext } from "../../context/counter-context";
-import Data from "../../pages/ProductsPage/Data";
-
-const styles = {
-    div:{
-        display: "flex",
-        justifyContent: "space-around",
-        marginTop: '3rem',
-    }
-}
+import Index from "../../components/ProductItem";
+import { BasketContext } from "../../context/basket-context";
+import Products from "../../mock/products";
+import ContentContainer from "../../components/ContentContainer";
 
 const ProductPage = () => {
-    const [basketItems, setBasketItems, onAdd] = useContext(CounterContext);
+    const [, addProduct] = useContext(BasketContext);
 
     return (
-        <div>
-            <div style={styles.div}>
-                {Data.map((product, index)=>{
-                    return (
-                        <ProductItem key={index} product={product} onAdd={onAdd} />
-                    );
-                })}
-            </div>
-        </div>
+        <ContentContainer>
+            {Products.map((product, index) =>
+                <Index
+                    key={index}
+                    product={product}
+                    onAdd={addProduct}
+                />
+            )}
+        </ContentContainer>
     );
 };
 
