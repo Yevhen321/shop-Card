@@ -4,14 +4,23 @@ export const BasketContext = createContext();
 
 export const BasketContextProvider = ({children}) => {
     const [basketProducts, setBasketProducts] = useState([]);
-    const [totalPrice, setTotalPrice] = useState(0);
-    const [discount, setDiscount] = useState(0);
+    const [price, setPrice] = useState(0);
+    const [priceDiscount, setPriceDiscount] = useState(0);
+
 
     useEffect(() => {
-        const price = basketProducts.reduce((a,c) => a + c.price * c.qty, 0);
-        const disc = basketProducts.reduce((a,c) => a + c.qty >= 3 ? price * 0.83 : 0, 0);
-        setTotalPrice(price);
-        setDiscount(disc);
+        let priceWithoutDiscount = 0;
+        let priceWithDiscount = 0;
+
+        basketProducts.forEach(prod => {
+            priceWithoutDiscount +=  prod.price * prod.qty
+            priceWithDiscount +=
+                prod.discount && prod.discount.active && prod.qty >= 3
+                    ? (prod.price * prod.qty) * (100 - prod.discount.percent ) / 100
+                    : prod.price * prod.qty;
+        })
+        setPrice(priceWithoutDiscount);
+        setPriceDiscount(priceWithDiscount);
     }, [basketProducts])
 
     const addProduct = (product) => {
@@ -25,6 +34,19 @@ export const BasketContextProvider = ({children}) => {
             setBasketProducts([...basketProducts, {...product, qty: 1}]);
         }
     }
+
+    const increaseProductQty = (qty, id) => {
+        const updatedProducts = basketProducts.map(product => {
+            if (product.id === id) {
+                return {
+                    ...product,
+                    qty: qty
+                }
+            } return product;
+        })
+        setBasketProducts(updatedProducts);
+    }
+
     const removeProduct = (product) => {
         const exist = basketProducts.find(x => x.id === product.id);
         if (exist.qty === 1) {
@@ -36,7 +58,15 @@ export const BasketContextProvider = ({children}) => {
         }
     };
     return (
-        <BasketContext.Provider value={[basketProducts, addProduct, removeProduct, totalPrice, discount]}>
+        <BasketContext.Provider
+            value={[
+                basketProducts,
+                addProduct,
+                removeProduct,
+                price,
+                priceDiscount,
+                increaseProductQty
+            ]}>
             {children}
         </BasketContext.Provider>
     );

@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import Index from "../../components/ProductItem";
+import ProductItem from "../../components/ProductItem";
 import { BasketContext } from "../../context/basket-context";
 import Products from "../../mock/products";
 import ContentContainer from "../../components/ContentContainer";
@@ -10,10 +10,11 @@ const ProductPage = () => {
     return (
         <ContentContainer>
             {Products.map((product, index) =>
-                <Index
+                <ProductItem
                     key={index}
                     product={product}
                     onAdd={addProduct}
+
                 />
             )}
         </ContentContainer>

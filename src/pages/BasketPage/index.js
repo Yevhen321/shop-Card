@@ -13,7 +13,14 @@ const styles = {
 }
 
 const Basket = () =>{
-    const [basketProducts, addProduct, removeProduct, totalPrice, discount] = useContext(BasketContext);
+    const [
+        basketProducts,
+        addProduct,
+        removeProduct,
+        price,
+        priceDiscount,
+        increaseProductQty
+    ] = useContext(BasketContext);
 
     return (
         <ContentContainer>
@@ -25,12 +32,13 @@ const Basket = () =>{
                             product={product}
                             addProduct={addProduct}
                             removeProduct={removeProduct}
+                            onChangeInput={increaseProductQty}
                         />
                     </div>
                 ))}
                 <span>
-                <div>Total price: {totalPrice && totalPrice.toFixed(2)} $</div>
-                <div>{discount ? `Discount price: ${discount.toFixed(2)} $` : ''}</div>
+                <div>Price: {price} $</div>
+                { priceDiscount !== price && <div>Price with discount:{priceDiscount} $</div>}
             </span>
             </div>
         </ContentContainer>
