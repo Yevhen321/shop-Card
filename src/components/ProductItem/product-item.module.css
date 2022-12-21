@@ -1,0 +1,33 @@
+.box {
+  position: relative;
+}
+
+.saleBox {
+  position: absolute;
+  top: 1px;
+  right: 2px;
+  width: 70px;
+  height: 70px;
+  background-color: #ff0000bd;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.image {
+  max-height: 10rem;
+}
+
+.button {
+  font-size: 1rem;
+  padding: 0.2rem;
+  margin: 0.1rem;
+  border-radius: 0.5rem;
+  border: 0.1rem solid blue;
+  background-color: green;
+  width: 100%;
+  cursor: pointer;
+}
