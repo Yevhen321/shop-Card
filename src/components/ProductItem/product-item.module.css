@@ -1,5 +1,11 @@
 .box {
   position: relative;
+  box-shadow: rgb(0 0 0 / 20%) 0px 2px 1px -1px,
+    rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;
+  background-color: #fff;
+  max-width: 22rem;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
 }
 
 .saleBox {
@@ -17,17 +23,69 @@
   flex-direction: column;
 }
 
+.price {
+  font-size: 1.2rem;
+  line-height: 1.43;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+}
+
 .image {
-  max-height: 10rem;
+  display: block;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  object-fit: cover;
+  width: 20rem;
+  height: 15rem;
+}
+
+.text {
+  font-size: 1.5rem;
+  line-height: 1.334;
+  letter-spacing: 0em;
+  font-weight: 400;
+  text-transform: capitalize;
 }
 
 .button {
-  font-size: 1rem;
-  padding: 0.2rem;
-  margin: 0.1rem;
-  border-radius: 0.5rem;
-  border: 0.1rem solid blue;
-  background-color: green;
-  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  padding: 0.375rem 1rem;
+  border-radius: 0.25rem;
+  background-color: rgb(25, 118, 210);
+  color: #fff;
+  text-transform: uppercase;
   cursor: pointer;
+  outline: 0px;
+  border: 0px;
+}
+
+.button:hover {
+  box-shadow: rgb(0 0 0 / 20%) 0px 3px 1px -2px,
+    rgb(0 0 0 / 14%) 0px 2px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 5px 0px;
+}
+
+.button:active {
+  color: rgba(0, 0, 0, 0.87);
+  background-color: rgb(25, 118, 210, 0.87);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.productDescBox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.buttonBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

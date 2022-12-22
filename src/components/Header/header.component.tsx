@@ -4,7 +4,6 @@ import {
   BasketContext,
   BasketContextProps,
 } from "../../context/basket-context";
-import { ContentContainer } from "../ContentContainer/content-container.component";
 import styles from "./header.module.css";
 
 export const Header = () => {
@@ -12,17 +11,21 @@ export const Header = () => {
 
   return (
     <header className={styles.header}>
-      <ContentContainer>
-        <div className={styles.text}>Product Shop</div>
+      <div className={styles.wrapper}>
         <div>
-          <Link to="/product" className={styles.text}>
-            Products{" "}
+          <Link to="/" className={styles.link}>
+            Product Shop
           </Link>
-          <Link to="/basket" className={styles.text}>
+        </div>
+        <div className={styles.productBox}>
+          <Link to="/products" className={styles.link}>
+            Products
+          </Link>
+          <Link to="/basket" className={styles.link}>
             Basket {basketProducts.length}
           </Link>
         </div>
-      </ContentContainer>
+      </div>
     </header>
   );
 };

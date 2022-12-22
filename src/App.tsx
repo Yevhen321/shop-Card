@@ -8,7 +8,8 @@ const App = () => (
   <BasketContextProvider>
     <Header />
     <Routes>
-      <Route path="/product" element={<ProductsPage />} />
+      <Route path="/" />
+      <Route path="/products" element={<ProductsPage />} />
       <Route path="/basket" element={<BasketPage />} />
     </Routes>
   </BasketContextProvider>

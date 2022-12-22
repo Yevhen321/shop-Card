@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { ProductProps } from "../mock/products";
-import Product from "../mock/products";
 
 export type BasketContextProps = {
   basketProducts: ProductProps[];
@@ -15,8 +14,8 @@ export const BasketContext = React.createContext<BasketContextProps | null>(
   null
 );
 
-export const BasketContextProvider = ({ children }) => {
-  const [basketProducts, setBasketProducts] = useState<ProductProps[]>(Product);
+export const BasketContextProvider = ({ children }: any) => {
+  const [basketProducts, setBasketProducts] = useState<ProductProps[]>([]);
   const [price, setPrice] = useState<number>(0);
   const [priceDiscount, setPriceDiscount] = useState<number>(0);
 
@@ -38,51 +37,44 @@ export const BasketContextProvider = ({ children }) => {
   }, [basketProducts]);
 
   const addProduct = (product: ProductProps) => {
-    if (Array.isArray(basketProducts)) {
-      const exist = basketProducts.find(
-        (x: ProductProps) => x.id === product.id
+    const exist = basketProducts.find(
+      (prod: ProductProps) => prod.id === product.id
+    );
+    if (exist) {
+      setBasketProducts(
+        basketProducts.map((prod: ProductProps) =>
+          prod.id === product.id ? { ...exist, qty: exist.qty + 1 } : prod
+        )
       );
-      if (exist) {
-        setBasketProducts(
-          basketProducts.map((x: ProductProps) =>
-            x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
-          )
-        );
-      } else {
-        setBasketProducts([...basketProducts, { ...product, qty: 1 }]);
-      }
+    } else {
+      setBasketProducts([...basketProducts, { ...product, qty: 1 }]);
     }
   };
 
   const increaseProductQty = (qty: number, id: number) => {
-    if (Array.isArray(basketProducts)) {
-      const updatedProducts = basketProducts.map((product: ProductProps) => {
-        if (product.id === id) {
-          return {
-            ...product,
-            qty: qty,
-          };
-        }
-        return product;
-      });
-      setBasketProducts(updatedProducts);
-    }
+    const updatedProducts = basketProducts.map((product: ProductProps) => {
+      if (product.id === id) {
+        return {
+          ...product,
+          qty: qty,
+        };
+      }
+      return product;
+    });
+    setBasketProducts(updatedProducts);
   };
 
   const removeProduct = (product: ProductProps) => {
-    if (Array.isArray(basketProducts)) {
-      const exist = basketProducts.find(
-        (x: ProductProps) => x.id === product.id
+    const exist = basketProducts.find((x: ProductProps) => x.id === product.id);
+    console.log("e", exist);
+    if (exist && exist.qty === 1) {
+      setBasketProducts(basketProducts.filter((x) => x.id !== product.id));
+    } else {
+      setBasketProducts(
+        basketProducts.map((x) =>
+          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+        )
       );
-      if (exist && exist.qty === 1) {
-        setBasketProducts(basketProducts.filter((x) => x.id !== product.id));
-      } else {
-        setBasketProducts(
-          basketProducts.map((x) =>
-            x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
-          )
-        );
-      }
     }
   };
   return (

@@ -1,20 +1,20 @@
 import React, { useContext } from "react";
-import { ProductItem, ContentContainer } from "../../components";
+import { ProductItem } from "../../components";
 import {
   BasketContext,
   BasketContextProps,
 } from "../../context/basket-context";
+import Product from "../../mock/products";
+import styles from "./products-page.module.css";
 
 export const ProductsPage = () => {
-  const { basketProducts, addProduct } = useContext(
-    BasketContext
-  ) as BasketContextProps;
+  const { addProduct } = useContext(BasketContext) as BasketContextProps;
 
   return (
-    <ContentContainer>
-      {basketProducts.map((product) => (
+    <div className={styles.wrapper}>
+      {Product.map((product) => (
         <ProductItem key={product.id} product={product} onAdd={addProduct} />
       ))}
-    </ContentContainer>
+    </div>
   );
 };

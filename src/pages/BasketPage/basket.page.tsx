@@ -3,7 +3,7 @@ import {
   BasketContext,
   BasketContextProps,
 } from "../../context/basket-context";
-import { BasketProductItem, ContentContainer } from "../../components";
+import { BasketProductItem } from "../../components";
 
 export const BasketPage = () => {
   const {
@@ -16,26 +16,24 @@ export const BasketPage = () => {
   } = useContext(BasketContext) as BasketContextProps;
 
   return (
-    <ContentContainer>
-      <div style={{ width: "100%" }}>
-        {basketProducts.length === 0 && "Basket is empty"}
-        {basketProducts.map((product) => (
-          <div key={product.id} style={{ margin: "1rem 0" }}>
-            <BasketProductItem
-              product={product}
-              addProduct={addProduct}
-              removeProduct={removeProduct}
-              onChangeInput={increaseProductQty}
-            />
-          </div>
-        ))}
-        <span>
-          <div>Price: {price} $</div>
-          {priceDiscount !== price && (
-            <div>Price with discount:{priceDiscount} $</div>
-          )}
-        </span>
-      </div>
-    </ContentContainer>
+    <div style={{ width: "100%" }}>
+      {basketProducts.length === 0 && "Basket is empty"}
+      {basketProducts.map((product) => (
+        <div key={product.id} style={{ margin: "1rem 0" }}>
+          <BasketProductItem
+            product={product}
+            addProduct={addProduct}
+            removeProduct={removeProduct}
+            onChangeInput={increaseProductQty}
+          />
+        </div>
+      ))}
+      <span>
+        <div>Price: {price} $</div>
+        {priceDiscount !== price && (
+          <div>Price with discount:{priceDiscount} $</div>
+        )}
+      </span>
+    </div>
   );
 };
