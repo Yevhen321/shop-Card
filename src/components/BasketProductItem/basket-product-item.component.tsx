@@ -18,7 +18,7 @@ export const BasketProductItem = ({
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    setCount(product.qty);
+    setCount(product.qty!);
   }, [product.qty]);
 
   return (
@@ -45,7 +45,7 @@ export const BasketProductItem = ({
         </div>
       </div>
       {product.discount.active &&
-        product.qty >= 3 &&
+        product.qty! >= 3 &&
         `Discount: ${product.discount.percent} %`}
     </div>
   );

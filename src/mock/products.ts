@@ -10,7 +10,7 @@ export type ProductProps = {
   price: number;
   image: string;
   discount: Discount;
-  qty: number;
+  qty?: number;
 };
 
 const Product: ProductProps[] = [
